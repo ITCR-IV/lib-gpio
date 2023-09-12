@@ -48,3 +48,5 @@ def read_pin(pin_number):
     elif(ret == 3):
         print(f"ERROR: couldn't read GPIO line {pin_number}")
         raise OSError(errno.EACCES, f"Couldn't read GPIO line {pin_number}");
+
+    return value.value
