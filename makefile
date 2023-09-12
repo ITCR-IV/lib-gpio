@@ -11,5 +11,4 @@ libcasagpio.so: casa_gpio.c
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o core *~ $(INCDIR)/*~ 
-	rmdir $(ODIR)
+	rm -f *.so
