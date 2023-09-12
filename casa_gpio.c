@@ -8,12 +8,15 @@ int init_gpio() {
   return CHIP == NULL;
 }
 
-void close_gpio() { gpiod_chip_close(CHIP); }
+void close_gpio() {
+  if (CHIP != NULL)
+    gpiod_chip_close(CHIP);
+}
 
 int write_pin(size_t pin_number, int value) {
-	if(CHIP == NULL) {
-		return -1;
-	}
+  if (CHIP == NULL) {
+    return -1;
+  }
 
   struct gpiod_line *line = gpiod_chip_get_line(CHIP, pin_number);
 
@@ -35,9 +38,9 @@ int write_pin(size_t pin_number, int value) {
 }
 
 int read_pin(size_t pin_number, int *read_value) {
-	if(CHIP == NULL) {
-		return -1;
-	}
+  if (CHIP == NULL) {
+    return -1;
+  }
 
   struct gpiod_line *line = gpiod_chip_get_line(CHIP, pin_number);
 
