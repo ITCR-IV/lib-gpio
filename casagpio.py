@@ -2,7 +2,7 @@ import ctypes
 import errno
 
 # Load the shared library into ctypes
-c_lib = ctypes.CDLL("libcasagpio.so")
+c_lib = ctypes.CDLL("libcasagpio.so.0")
 
 def init_gpio():
     ret = c_lib.init_gpio()
