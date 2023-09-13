@@ -1,5 +1,4 @@
 import ctypes
-import pathlib
 import errno
 
 # Load the shared library into ctypes
