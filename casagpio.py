@@ -3,8 +3,7 @@ import pathlib
 import errno
 
 # Load the shared library into ctypes
-libname = pathlib.Path().absolute() / "libcasagpio.so"
-c_lib = ctypes.CDLL(libname)
+c_lib = ctypes.CDLL("libcasagpio.so")
 
 def init_gpio():
     ret = c_lib.init_gpio()
