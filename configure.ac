@@ -6,9 +6,8 @@ AM_PROG_AR
 
 LT_INIT
 
-AC_CONFIG_FILES(Makefile)
+AC_CONFIG_FILES(Makefile lib/Makefile src/Makefile)
 AC_CONFIG_MACRO_DIRS([m4])
-
 AC_PREFIX_DEFAULT([/usr])
 
 AC_CHECK_LIB([gpiod], [gpiod_line_set_value],
