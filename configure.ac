@@ -9,7 +9,6 @@ LT_INIT
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_MACRO_DIRS([m4])
 
-AM_PATH_PYTHON([3.0])
 AC_PREFIX_DEFAULT([/usr])
 
 AC_CHECK_LIB([gpiod], [gpiod_line_set_value],

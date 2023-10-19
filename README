@@ -1,3 +1,31 @@
 # libcasagpio
 
 Biblioteca para controlar GPIO de forma extremadamente simple.
+
+Integrantes del grupo:
+
+- Johnny Agüero: 2020027766
+- Kenichi Hayakawa: 2020044884
+- Ignacio Vargas: 2019053776
+
+## Compilación
+
+Primero generar archivos de autotools:
+
+```
+autoreconf -i
+```
+
+Configurar automake:
+```
+./configure --target=arm-poky-linux-gnueabi --host=arm-poky-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=/opt/poky/4.2.3/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
+```
+
+Ajustar el path de `/opt/poky/4.2.3/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi` a donde se encuentre el toolchain en su sistema.
+
+Finalmente compilar biblioteca:
+```
+make
+```
+
+La biblioteca compartida se encontrará en un directorio `.libs/`.
