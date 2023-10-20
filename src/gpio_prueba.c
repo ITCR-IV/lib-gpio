@@ -3,10 +3,51 @@
 #include "casa_gpio.h"
 
 int main() {
+  int ret;
 
-  printf("==============================\n");
-  printf("Hola Mundo\n");
-  printf("==============================\n");
+  if ((ret = init_gpio())) {
+    fprintf(stderr, "No se pudo inicializar el GPIO\n");
+    return ret;
+  }
+
+  if ((ret = pinMode(20, OUTPUT))) {
+    fprintf(stderr, "No se pudo setear el pin 20 como output\n");
+    return ret;
+  }
+
+  if ((ret = pinMode(21, OUTPUT))) {
+    fprintf(stderr, "No se pudo setear el pin 21 como output\n");
+    return ret;
+  }
+
+  if ((ret = pinMode(16, INPUT))) {
+    fprintf(stderr, "No se pudo setear el pin 16 como input\n");
+    return ret;
+  }
+
+  printf("Seteando el pin 20 en alto (1)\n");
+
+  if ((ret = digital_write(20, 1))) {
+    fprintf(stderr, "No se pudo setear el pin 20 alto (1)\n");
+    return ret;
+  }
+
+  printf("Iniciando blink de 0.5Hz por 3 segundos en pin 21\n");
+
+  if ((ret = blink(21, 0.5, 5))) {
+    fprintf(stderr, "Falló el blink del pin 21\n");
+    return ret;
+  }
+
+  printf("Leyendo pin 16:\n");
+  int valor;
+
+  if ((ret = digital_read(16, &valor))) {
+    fprintf(stderr, "Fallo al leer el pin 16\n");
+    return ret;
+  }
+
+  printf("Valor leído: %d", valor);
 
   return 0;
 }

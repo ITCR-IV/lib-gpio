@@ -95,12 +95,15 @@ int blink(size_t pin, float freq, float duration) {
   delay.tv_nsec = (1000000000 / (long)freq) % 1000000000;
 
   size_t loops = duration * freq;
+  int ret;
 
   for (size_t i = 0; i < loops; i++) {
     if (nanosleep(&delay, NULL) == -1) {
       return 10;
     }
-    digital_write(pin, i % 2);
+    if ((ret = digital_write(pin, i % 2))) {
+      return ret;
+    }
   }
 
   return 0;
