@@ -82,3 +82,26 @@ int pinMode(size_t pin, enum PinMode MODE) {
 
   return 0;
 }
+
+int blink(size_t pin, float freq, float duration) {
+  if (CHIP == NULL) {
+    return -1;
+  }
+
+  struct gpiod_line *line = gpiod_chip_get_line(CHIP, pin);
+
+  struct timespec delay;
+  delay.tv_sec = 1 / freq;
+  delay.tv_nsec = (1000000000 / (long)freq) % 1000000000;
+
+  size_t loops = duration * freq;
+
+  for (size_t i = 0; i < loops; i++) {
+    if (nanosleep(&delay, NULL) == -1) {
+      return 10;
+    }
+    digital_write(pin, i % 2);
+  }
+
+  return 0;
+}
