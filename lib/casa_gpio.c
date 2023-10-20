@@ -92,8 +92,6 @@ int blink(size_t pin, float freq, float duration) {
     return -1;
   }
 
-  struct gpiod_line *line = gpiod_chip_get_line(CHIP, pin);
-
   size_t period = 1000000 / freq;
   size_t loops = duration * freq;
   int ret;
@@ -103,7 +101,7 @@ int blink(size_t pin, float freq, float duration) {
     if (usleep(period) != 0) {
       return 10;
     }
-    printf("escribiendo %zu\n", i % 2);
+    printf("escribiendo %zu\n", (i+1) % 2);
     if ((ret = digital_write(pin, i % 2))) {
       return ret;
     }
