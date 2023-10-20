@@ -96,7 +96,9 @@ int blink(size_t pin, float freq, float duration) {
   size_t loops = duration * freq;
   int ret;
 
+  printf("%zu loops\n", loops);
   for (size_t i = 0; i < loops; i++) {
+    printf("escribiendo %zu\n", (i + 1) % 2);
     if ((ret = digital_write(pin, i % 2))) {
       return ret;
     }
