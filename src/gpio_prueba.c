@@ -36,9 +36,9 @@ int main() {
     return ret;
   }
 
-  printf("Iniciando blink de 0.5Hz por 3 segundos en pin 21\n");
+  printf("Iniciando blink de 0.5Hz por 5 segundos en pin 21\n");
 
-  if ((ret = blink(21, 1, 3))) {
+  if ((ret = blink(21, 0.5, 5))) {
     fprintf(stderr, "Falló el blink del pin 21 (Error: %d)\n", ret);
     return ret;
   }

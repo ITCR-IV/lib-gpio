@@ -25,7 +25,7 @@ int digital_write(size_t pin, int value) {
     return 1;
   }
 
-	gpiod_line_request_output(line, "lib_casa_gpio", value);
+  gpiod_line_request_output(line, "lib_casa_gpio", value);
 
   if (gpiod_line_set_value(line, value)) {
     return 3;
@@ -47,9 +47,7 @@ int digital_read(size_t pin, int *read_value) {
     return 1;
   }
 
-  if (gpiod_line_request_input(line, "lib_casa_gpio")) {
-    return 2;
-  }
+  gpiod_line_request_input(line, "lib_casa_gpio");
 
   int value = gpiod_line_get_value(line);
 
