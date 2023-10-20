@@ -1,6 +1,5 @@
 #include "casa_gpio.h"
 #include <gpiod.h>
-#include <stdio.h>
 #include <unistd.h>
 
 static struct gpiod_chip *CHIP;
@@ -26,6 +25,10 @@ int digital_write(size_t pin, int value) {
     return 1;
   }
 
+  if (gpiod_line_request_output(line, "lib_casa_gpio", value)) {
+    return 2;
+  }
+
   if (gpiod_line_set_value(line, value)) {
     return 3;
   }
@@ -44,6 +47,10 @@ int digital_read(size_t pin, int *read_value) {
 
   if (line == NULL) {
     return 1;
+  }
+
+  if (gpiod_line_request_input(line, "lib_casa_gpio")) {
+    return 2;
   }
 
   int value = gpiod_line_get_value(line);
@@ -96,9 +103,7 @@ int blink(size_t pin, float freq, float duration) {
   size_t loops = duration * freq;
   int ret;
 
-  printf("%zu loops\n", loops);
   for (size_t i = 0; i < loops; i++) {
-    printf("escribiendo %zu\n", (i + 1) % 2);
     if ((ret = digital_write(pin, i % 2))) {
       return ret;
     }

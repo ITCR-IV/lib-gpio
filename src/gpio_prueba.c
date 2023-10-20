@@ -35,11 +35,6 @@ int main() {
     fprintf(stderr, "No se pudo setear el pin 20 alto (1) (Error: %d)\n", ret);
     return ret;
   }
-	usleep(1000000);
-  if ((ret = digital_write(20, 0))) {
-    fprintf(stderr, "No se pudo setear el pin 20 bajo (0) (Error: %d)\n", ret);
-    return ret;
-  }
 
   printf("Iniciando blink de 0.5Hz por 3 segundos en pin 21\n");
 
