@@ -73,11 +73,13 @@ int pinMode(size_t pin, enum PinMode MODE) {
     if (gpiod_line_request_input(line, "lib_casa_gpio")) {
       return 2;
     }
+    break;
 
   case OUTPUT:
     if (gpiod_line_request_output(line, "lib_casa_gpio", 0)) {
       return 2;
     }
+    break;
   }
 
   return 0;
