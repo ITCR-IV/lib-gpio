@@ -1,5 +1,6 @@
 #include "casa_gpio.h"
 #include <gpiod.h>
+#include <stdio.h>
 
 static struct gpiod_chip *CHIP;
 
@@ -99,10 +100,12 @@ int blink(size_t pin, float freq, float duration) {
   size_t loops = duration * freq;
   int ret;
 
+  printf("%zu loops", loops);
   for (size_t i = 0; i < loops; i++) {
     if (nanosleep(&delay, NULL) == -1) {
       return 10;
     }
+    printf("escribiendo %zu", i % 2);
     if ((ret = digital_write(pin, i % 2))) {
       return ret;
     }
