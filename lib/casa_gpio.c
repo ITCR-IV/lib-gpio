@@ -1,6 +1,7 @@
 #include "casa_gpio.h"
 #include <gpiod.h>
 #include <stdio.h>
+#include <unistd.h>
 
 static struct gpiod_chip *CHIP;
 
@@ -93,19 +94,16 @@ int blink(size_t pin, float freq, float duration) {
 
   struct gpiod_line *line = gpiod_chip_get_line(CHIP, pin);
 
-  struct timespec delay;
-  delay.tv_sec = 1 / freq;
-  delay.tv_nsec = (1000000000 / (long)freq) % 1000000000;
-
+  size_t period = 1000000 / freq;
   size_t loops = duration * freq;
   int ret;
 
-  printf("%zu loops", loops);
+  printf("%zu loops\n", loops);
   for (size_t i = 0; i < loops; i++) {
-    if (nanosleep(&delay, NULL) == -1) {
+    if (usleep(period) != 0) {
       return 10;
     }
-    printf("escribiendo %zu", i % 2);
+    printf("escribiendo %zu\n", i % 2);
     if ((ret = digital_write(pin, i % 2))) {
       return ret;
     }
