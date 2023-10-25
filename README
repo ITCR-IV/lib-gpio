@@ -20,8 +20,12 @@ Configurar automake:
 ```
 ./configure --target=arm-poky-linux-gnueabi --host=arm-poky-linux-gnueabi --build=x86_64-linux --with-libtool-sysroot=/opt/poky/4.2.3/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi
 ```
-
 Ajustar el path de `/opt/poky/4.2.3/sysroots/cortexa7t2hf-neon-vfpv4-poky-linux-gnueabi` a donde se encuentre el toolchain en su sistema.
+O si activa el entorno del toolchain de Yocto:
+```
+./configure ${CONFIGURE_FLAGS}
+```
+
 
 Finalmente compilar biblioteca:
 ```
